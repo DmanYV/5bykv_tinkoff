@@ -9,7 +9,7 @@ def get_otvet():
     soup = BeautifulSoup(response.text, 'html.parser')
     data = soup.find('h3').text
     otvet = soup.find('mark', class_='m3').text
-    print(f'На {data}\nОтвет: {otvet}')
+    print(f'На {data}\nЗагаданное слово: {otvet}')
 
 
 if __name__ == '__main__':
