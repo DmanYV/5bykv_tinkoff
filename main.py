@@ -8,8 +8,8 @@ def get_request():
     response = requests.get(url=url)
     soup = BeautifulSoup(response.text, 'html.parser')
     data = soup.find('h3').text
-    otvet = soup.find('mark', class_='m3').text
-    print(f'На {data}\nЗагаданное слово: {otvet}')
+    request = soup.find('mark', class_='m3').text
+    print(f'На {data}\nЗагаданное слово: {request}')
 
 
 if __name__ == '__main__':
