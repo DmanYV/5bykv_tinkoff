@@ -5,22 +5,33 @@ url1 = 'https://landofgames.ru/articles/guides/22117-otvety-na-igru-5-bukv-v-tin
 url2 = 'https://between-us-girls.ru/5-bukv-tinkoff-segodnya-otvet/'
 
 
-def get_request1():
-    response = requests.get(url=url2)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    data = soup.find('td').text
-    request = soup.find('td').find_next('td').text
-    print(f'Ресурс 1:\nНа {data}\nЗагаданное слово: {request}\n')
-
-
-def get_request2():
+def get_data():
     response = requests.get(url=url1)
     soup = BeautifulSoup(response.text, 'html.parser')
     data = soup.find('h3').text
-    request = soup.find('mark', class_='m3').text
-    print(f'Ресурс 2:\nНа {data}\nЗагаданное слово: {request}')
+    return data
+
+
+def get_response1():
+    response = requests.get(url=url2)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    word = soup.find('td').find_next('td').text
+    return word
+
+
+def get_response2():
+    response = requests.get(url=url1)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    word = soup.find('mark', class_='m3').text
+    return word
+
+
+def request():
+    if get_response1().lower() == get_response2().lower():
+        print(f'На {get_data()}\nЗагаданное слово: {get_response1()}')
+    else:
+        print(f'Загаданное слово: {get_response2()}')
 
 
 if __name__ == '__main__':
-    get_request1()
-    get_request2()
+    request()
