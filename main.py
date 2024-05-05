@@ -13,24 +13,24 @@ def get_data():
 
 
 def get_response1():
-    response = requests.get(url=url2)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    word = soup.find('td').find_next('td').text
-    return word
-
-
-def get_response2():
     response = requests.get(url=url1)
     soup = BeautifulSoup(response.text, 'html.parser')
     word = soup.find('mark', class_='m3').text
     return word
 
 
+def get_response2():
+    response = requests.get(url=url2)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    word = soup.find('td').find_next('td').text
+    return word
+
+
 def request():
-    if get_response1().lower() == get_response2().lower():
-        print(f'На {get_data()}\nЗагаданное слово: {get_response1()}')
+    if get_response2().lower() == get_response1().lower():
+        print(f'На {get_data()}\nЗагаданное слово: {get_response2()}')
     else:
-        print(f'Загаданное слово: {get_response2()}')
+        print(f'Загаданное слово: {get_response1()}')
 
 
 if __name__ == '__main__':
